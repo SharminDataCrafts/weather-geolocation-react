@@ -1,24 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Routes, Route } from "react-router"
+import Main from './components/Main/Main';
+import NotFound from './components/NotFound/NotFound';
+import Weather from './components/Weather/Weather';
+import Geolocation from './components/Geolocation/Geolocation';
+import { createContext, useState } from 'react';
+
+export const PlaceContext = createContext();
 
 function App() {
+  const [place, setPlace] = useState('')
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div className='App'>
+      <PlaceContext.Provider value={ [place, setPlace]}>
+        <BrowserRouter>
+        <Routes>
+          <Route path='/main' element={<Main/>} />
+          <Route exact path='/' element={<Main/>} />
+          <Route exact path='/weather/:inp' element={<Weather/>} />
+          <Route exact path='/geolocation/:inp' element={<Geolocation/>} />
+          <Route path='/*' element={<NotFound/>} />
+        </Routes>
+      </BrowserRouter>
+    </PlaceContext.Provider>
+   </div>
   );
 }
 
