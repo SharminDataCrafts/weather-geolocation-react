@@ -26,4 +26,4 @@ A React application that provides weather information and displays a map for any
 - React Hooks: useState and useEffect for handling state and side effects.
 
 ## 🚀 Deployment
-netlify -
+netlify - https://weather-geolocation-react.netlify.app/

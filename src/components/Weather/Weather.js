@@ -14,7 +14,7 @@ const Weather = () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${inp}&appid=${API_key}`;
 
     useEffect(()=>{
-      return async()=>{
+        const fetchData = async()=>{
         try{
             const response = await fetch(url);
             const data = await response.json();
@@ -25,6 +25,7 @@ const Weather = () => {
             throw e;
            }
         }
+        fetchData();
       },[inp]);
     //   console.log(weatherInfo);
 
@@ -49,11 +50,12 @@ const Weather = () => {
                    Weather Information
             </Typography>
             <Card sx={{ maxWidth: 345, margin:'auto' , mt:5 }}>
-               
+            {imgSrc && (
                 <Box component="img" 
                     src={imgSrc}
                     alt='weather icon'>
                 </Box>
+            )}
                 <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                     {weatherInfo.name}
